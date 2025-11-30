@@ -10,7 +10,7 @@
 
 html {
   background: #345454;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 section {
@@ -19,7 +19,7 @@ section {
 
   &:nth-child(1) {
     height: 100vh;
-    background-image: url(/images/spy.jpg);
+    background-image: url(images/spy.jpg);
     background-position: center;
     background-size: cover;
     display: flex;
