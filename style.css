@@ -18,7 +18,7 @@ section {
   position: relative;
 
   &:nth-child(1) {
-    height: 100vh;
+    height: 100dvh;
     background-image: url(images/spy.jpg);
     background-position: center;
     background-size: cover;
@@ -58,7 +58,7 @@ section {
 
 
   &:nth-child(2) {
-    min-height: 100vh;
+    min-height: 100dvh;
     background-image: url(images/city.jpg);
     background-position: center;
     background-size: cover;
@@ -69,7 +69,7 @@ section {
     align-items: center;
 
     top: 0;
-    --top: -100vh;
+    --top: -100dvh;
     transition: all 0.2s;
   }
 
@@ -86,10 +86,10 @@ section {
 
   & > .gameParams {
     width: 80%;
-    height: calc(100vh - 200px);
+    height: calc(100dvh - 200px);
     display: grid;
     grid-template-rows: repeat(3, 1fr);
-    gap: 5vh;
+    gap: 5dvh;
     
     & > * {
       background: hsla(204, 29%, 20%, 0.9);
@@ -189,15 +189,15 @@ section {
     flex-direction: column;
     box-sizing: border-box;
     width: 90%;
-    height: 30vh;
+    height: 30dvh;
     margin: 0 5%;
     padding: 20px;
     background: #192730;
     color: #fff;
     border-radius: 15px;
 
-    top: -100vh;
-    --top: -195vh;
+    top: -100dvh;
+    --top: -195dvh;
     transition: all 0.2s;
 
     & > svg {
@@ -251,15 +251,15 @@ section {
 
 
   &:nth-child(4) {
-    min-height: 100vh;
+    min-height: 100dvh;
     background-image: url(images/city.jpg);
     color: #fff;
     background-position: center;
     background-size: cover;
     filter: saturate(0.7);
 
-    top: -130vh;
-    --top: -230vh;
+    top: -130dvh;
+    --top: -230dvh;
     transition: all 0.2s;
 
     & > .header {
@@ -271,7 +271,7 @@ section {
 
     & > #container {
       overflow-y: auto;
-      height: 85vh;
+      height: 85dvh;
     }
 
     & .player {
@@ -317,14 +317,14 @@ section {
 
 
   &:nth-child(5) {
-    height: 100vh;
+    height: 100dvh;
     background: linear-gradient(to bottom, #163f3f, #111b21);
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    top: -230vh;
-    --top: -330vh;
+    top: -230dvh;
+    --top: -330dvh;
     transition: all 0.2s;
 
     & > .header {
@@ -431,15 +431,15 @@ section {
   }
 
   &:nth-child(6) {
-    height: 100vh;
+    height: 100dvh;
     background: linear-gradient(to bottom, #163f3f, #111b21);
     color: #ddd;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    top: -330vh;
-    --top: -430vh;
+    top: -330dvh;
+    --top: -430dvh;
     transition: all 0.2s;
 
     & > .header {
@@ -512,7 +512,7 @@ section {
   }
 
   &:nth-child(7) {
-    height: 100vh;
+    height: 100dvh;
     background-image: url(/images/spy.jpg);
     background-position: center;
     background-size: cover;
@@ -521,8 +521,8 @@ section {
     justify-content: center;
     align-items: center;
 
-    top: -430vh;
-    --top: -530vh;
+    top: -430dvh;
+    --top: -530dvh;
     transition: all 0.2s;
 
     & > #end {
