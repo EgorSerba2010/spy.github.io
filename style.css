@@ -513,7 +513,7 @@ section {
 
   &:nth-child(7) {
     height: 100dvh;
-    background-image: url(/images/spy.jpg);
+    background-image: url(images/spy.jpg);
     background-position: center;
     background-size: cover;
     filter: saturate(0.3);
