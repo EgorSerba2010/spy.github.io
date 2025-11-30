@@ -19,7 +19,7 @@ section {
 
   &:nth-child(1) {
     height: 100dvh;
-    background-image: url(images/spy.jpg);
+    background-image: url(images/spy.png);
     background-position: center;
     background-size: cover;
     display: flex;
@@ -59,7 +59,7 @@ section {
 
   &:nth-child(2) {
     min-height: 100dvh;
-    background-image: url(images/city.jpg);
+    background-image: url(images/city.png);
     background-position: center;
     background-size: cover;
     filter: saturate(0.5);
@@ -252,7 +252,7 @@ section {
 
   &:nth-child(4) {
     min-height: 100dvh;
-    background-image: url(images/city.jpg);
+    background-image: url(images/city.png);
     color: #fff;
     background-position: center;
     background-size: cover;
@@ -513,7 +513,7 @@ section {
 
   &:nth-child(7) {
     height: 100dvh;
-    background-image: url(images/spy.jpg);
+    background-image: url(images/spy.png);
     background-position: center;
     background-size: cover;
     filter: saturate(0.3);
