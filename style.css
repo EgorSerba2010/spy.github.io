@@ -190,6 +190,7 @@ section {
     box-sizing: border-box;
     width: 90%;
     height: 30dvh;
+    min-height: 180px;
     margin: 0 5%;
     padding: 20px;
     background: #192730;
@@ -235,9 +236,8 @@ section {
 
     & > #addBtn {
       width: 80%;
-      height: 40px;
+      min-height: 40px;
       margin: 0 auto;
-      margin-top: 20px;
       color: #000;
       font: 16px Roboto;
       background: #fff;
