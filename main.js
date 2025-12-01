@@ -21,13 +21,19 @@ const $cardsList = document.querySelector('#cardsList')
 const $currentName = document.querySelector('#currentName')
 const $hint = document.querySelector('#hint')
 const $first = document.querySelector('#first')
+const progress = document.querySelector('.progress-ring__progress')
+const timeEl = document.querySelector('#timeRemain')
 
 const locations = ['Аэропорт', 'Больница', 'Школа', 'Университет', 'Ресторан', 'Кафе', 'Бар', 'Театр', 'Кинотеатр', 'Музей', 'Библиотека', 'Стадион', 'Спортзал', 'Бассейн', 'Пляж', 'Парк', 'Зоопарк', 'Цирк', 'Церковь', 'Монастырь', 'Тюрьма', 'Полицейский участок', 'Военная база', 'Космическая станция', 'Метро', 'Автобусная остановка', 'Железнодорожный вокзал', 'Супермаркет', 'Рынок', 'Офис']
 const $players = []
 
+const radius = progress.r.baseVal.value
+const circumference = 2 * Math.PI * radius
+
 let $gameLocation = []
 let spyCount = 0
 let secs = 0
+let totalTime = 0
 let participants = []
 
 $newGameBtn.addEventListener('click', () => {
@@ -65,10 +71,8 @@ $startBtn.addEventListener('click', () => {
       $card.onclick = function() {
         if (!this.classList.contains('flip')) {
           this.classList.add('flip')
-
           $hint.textContent = 'Нажми и передай игроку выше'
-        }
-        else {
+        } else {
           if (i === 0) {
               $sections.forEach((sec, i) => {
               if (i === 5) sec.classList.add('active')
@@ -146,6 +150,9 @@ $endBtn.addEventListener('click', () => {
 
   $cardsList.innerHTML = ''
   $gameLocation = []
+  timeEl.textContent = '00:00'
+  secs = 0
+  totalTime = 0
 })
 
 $closeBtn.addEventListener('click', () => {
@@ -173,35 +180,6 @@ $playersBtn.addEventListener('click', () => {
     if (i === 3) sec.classList.add('active')
     else return
   })
-
-  // $players.forEach((pl1, i1) => {
-  //   pl1.addEventListener('click', (e) => {
-  //     if (e.target.tagName === 'path') {
-  //       e.target.parentElement.parentElement.style.display = 'none'
-  //       console.log(+pl1.querySelector('input').id.split('').at(-1))
-  //       $players.splice(+pl1.querySelector('input').id.split('').at(-1)-1, 1)
-
-  //       $players.forEach((pl2, i2) => {
-  //         if (i1 <= i2) {
-  //           const arr = pl2.querySelector('input').id.split('')
-  //           arr[arr.length - 1] = +arr[arr.length - 1]-1
-  //         }
-  //       })
-  //     }
-  //     else if (e.target.tagName === 'svg') {
-  //       e.target.parentElement.style.display = 'none'
-  //       console.log(+pl1.querySelector('input').id.split('').at(-1))
-  //       $players.splice(+pl1.querySelector('input').id.split('').at(-1)-1, 1)
-
-  //       $players.forEach((pl2, i2) => {
-  //         if (i1 >= i2) {
-  //           const arr = pl2.querySelector('input').id.split('')
-  //           arr[arr.length - 1] = +arr[arr.length - 1]-1
-  //         }
-  //       })
-  //     }
-  //   })
-  // })
 })
 
 $addPlayerBtn.addEventListener('click', () => {
@@ -216,7 +194,9 @@ $roundBtn.addEventListener('click', () => {
     if (i === 6) sec.classList.add('active')
     else return
   })
-  tick(secs)
+
+  if (secs === -1 && totalTime === 0 && $time.value != '') setSecs()
+  tick()
 })
 
 function setId(id) {
@@ -316,7 +296,6 @@ function restoreElements() {
     })
   }
 }
-
 window.addEventListener('load', () => {
   restoreElements()
   document.querySelectorAll('.checked').forEach(e => e.onclick = (e) => e.stopPropagation())
@@ -324,11 +303,18 @@ window.addEventListener('load', () => {
 })
 
 
-$time.addEventListener('change', () => {
+function setSecs() {
   const timeArr = $time.value.split(':')
-  secs = +timeArr[0]*3600 + +timeArr[1]*60 + +timeArr[2]
-  console.log(secs)
-})
+  if (timeArr.length === 3) {
+    secs = +timeArr[0]*3600 + +timeArr[1]*60 + +timeArr[2]
+    totalTime = secs
+  } else if (timeArr.length === 2) {
+    secs = +timeArr[0]*60 + +timeArr[1]
+    totalTime = secs
+  }
+}
+$time.addEventListener('change', () => setSecs())
+
 
 function getRandomLocation(plCount, spyCount) {
   const location = locations[Math.round(Math.random()*(locations.length-1))]
@@ -345,21 +331,13 @@ function getRandomLocation(plCount, spyCount) {
 
 
 
-
-
-const progress = document.querySelector('.progress-ring__progress')
-const radius = progress.r.baseVal.value
-const circumference = 2 * Math.PI * radius
-
 progress.style.strokeDasharray = `${circumference} ${circumference}`
 progress.style.strokeDashoffset = circumference
 
 function setProgress(percent) {
-  const offset = circumference - percent / 100 * circumference
+  const offset = circumference - (percent / 100) * circumference
   progress.style.strokeDashoffset = offset
 }
-
-const timeEl = document.getElementById('timeRemain')
 
 function formatTime(seconds) {
   const m = Math.floor(seconds / 60)
@@ -368,7 +346,6 @@ function formatTime(seconds) {
 }
 
 function tick() {
-  const totalTime = secs
   const percent = (secs / totalTime) * 100
   setProgress(percent)
 
@@ -379,6 +356,8 @@ function tick() {
     setTimeout(tick, 1000)
   }
 }
+
+
 
 
 function toRipple(btn) {
