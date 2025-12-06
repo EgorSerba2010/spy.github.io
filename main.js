@@ -294,8 +294,6 @@ function savePlayers() {
 }
 
 function restoreElements() {
-  $plCount.textContent = localStorage.getItem('playerCount') || 0
-
   const data = localStorage.getItem('players')
   if (data !== '') {
     $container.innerHTML = data
@@ -312,6 +310,10 @@ window.addEventListener('load', () => {
   restoreElements()
   document.querySelectorAll('.checked').forEach(e => e.onclick = (e) => e.stopPropagation())
   document.querySelectorAll('.player').forEach(e => toRipple(e))
+  document.querySelectorAll('.pl').forEach(e => e.onchange = () => {
+    if (e.checked) $plCount.textContent = +$plCount.textContent+1
+    else $plCount.textContent = +$plCount.textContent-1
+  })
 })
 
 
