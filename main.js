@@ -7,6 +7,7 @@ const $returnBtn = document.querySelector('#returnBtn')
 const $toMainBtn = document.querySelector('#toMainBtn')
 const $endBtn = document.querySelector('#end')
 const $closeGameBtn = document.querySelector('#closeGameBtn')
+const $plCount = document.querySelector('#plCount')
 const $addBtn = document.querySelector('#addBtn')
 const $roundBtn = document.querySelector('#roundBtn')
 const $addPlayerBtn = document.querySelector('#addPlayerBtn')
@@ -208,6 +209,8 @@ function getId() {
 
 function addPlayer() {
   if ($playerName.value !== '') {
+    $plCount.textContent = +$plCount.textContent+1
+
     setId(getId())
     const $newPlayer = document.createElement('label')
     $newPlayer.classList.add('player')
@@ -220,6 +223,10 @@ function addPlayer() {
     $newInput.checked = 'true'
     $newInput.className = 'pl'
     $newInput.id = 'pl'+getId()
+    $newInput.onchange = () => {
+      if ($newInput.checked) $plCount.textContent = +$plCount.textContent+1
+      else $plCount.textContent = +$plCount.textContent-1
+    }
   
     const svgNS = "http://www.w3.org/2000/svg"
     const $newSvg1 = document.createElementNS(svgNS, "svg")
@@ -271,6 +278,8 @@ $addBtn.addEventListener('click', () => {
 })
 
 function renumber() {
+  $plCount.textContent = +$plCount.textContent-1
+
   const items = $container.querySelectorAll('.player .pl')
   items.forEach((el, i) => {
     el.id = 'pl'+(i+1)
@@ -280,10 +289,13 @@ function renumber() {
 }
 
 function savePlayers() {
+  localStorage.setItem('playerCount', $plCount.textContent)
   localStorage.setItem('players', $container.innerHTML)
 }
 
 function restoreElements() {
+  $plCount.textContent = localStorage.getItem('playerCount') || 0
+
   const data = localStorage.getItem('players')
   if (data !== '') {
     $container.innerHTML = data

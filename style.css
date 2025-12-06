@@ -104,10 +104,15 @@ section {
 
     & > .players {
       position: relative;
+      
+      & span {
+        font-size: 24px;
+        opacity: 0.9;
+      }
 
       & > svg {
         position: absolute;
-        top: 30px;
+        top: 26px;
         right: 20px;
       }
 
